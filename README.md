@@ -69,17 +69,37 @@ PostgreSQL
 Docker Container
 ```
 ## Project Structure
-cineprime/
-├── backend/
-├── src/
-│   ├── components/
-│   ├── context/
-│   ├── pages/
-│   │   └── admin/
-│   └── services/
-├── screenshots/
-├── docker-compose.yml
-├── package.json
-└── README.md
+
+    cineprime/
+    ├── backend/
+    │   ├── src/
+    │   │   └── main/
+    │   │       ├── java/
+    │   │       │   └── com/cineprime/
+    │   │       │       ├── config/
+    │   │       │       ├── controller/
+    │   │       │       ├── entity/
+    │   │       │       ├── repository/
+    │   │       │       ├── security/
+    │   │       │       └── service/
+    │   │       └── resources/
+    │   ├── pom.xml
+    │   └── mvnw
+    ├── src/
+    │   ├── components/
+    │   ├── context/
+    │   ├── pages/
+    │   │   └── admin/
+    │   ├── services/
+    │   ├── App.jsx
+    │   └── main.jsx
+    ├── public/
+    ├── docker-compose.yml
+    ├── package.json
+    ├── package-lock.json
+    ├── vite.config.js
+    ├── index.html
+    ├── README.md
+    └── .gitignore
 
 
