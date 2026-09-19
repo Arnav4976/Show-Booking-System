@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import { BookingService } from '../services/api';
+import { useAuth } from '../context/AuthContext';
 import './Ticket.css';
 
 const BookingSummary = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [isBooking, setIsBooking] = useState(false);
   const [error, setError] = useState('');
 
@@ -21,7 +23,7 @@ const BookingSummary = () => {
     setIsBooking(true);
     try {
       const bookingResponse = await BookingService.create({
-        userId: 1, // hardcoded guest user
+        userId: user.id,
         showId: show.showId,
         selectedSeats: selectedSeats.map(s => s.seatId),
         totalAmount: totalPrice

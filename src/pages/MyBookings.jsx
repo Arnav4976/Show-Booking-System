@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import { BookingService } from '../services/api';
+import { useAuth } from '../context/AuthContext';
 import './Ticket.css';
 
 const MyBookings = () => {
+    const { user } = useAuth();
     const [bookings, setBookings] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        BookingService.getUserBookings().then(data => {
+        BookingService.getUserBookings(user.id).then(data => {
             setBookings([...data].sort((a,b) => new Date(b.bookingDate) - new Date(a.bookingDate)));
             setLoading(false);
         });

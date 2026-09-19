@@ -13,8 +13,10 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 @Component
-@Profile("!production") // Ensures this doesn't run in production unexpectedly
+@Profile("!production")
 @RequiredArgsConstructor
 public class DatabaseSeeder implements CommandLineRunner {
 
@@ -24,10 +26,23 @@ public class DatabaseSeeder implements CommandLineRunner {
     private final ScreenRepository screenRepository;
     private final SeatRepository seatRepository;
     private final ShowRepository showRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     @Transactional
     public void run(String... args) throws Exception {
+        // Ensure users have passwords if they already exist
+        List<User> users = userRepository.findAll();
+        for (User u : users) {
+            if (u.getPassword() == null || !u.getPassword().startsWith("$2a$")) {
+                u.setPassword(passwordEncoder.encode("password123"));
+                if (u.getRoles().startsWith("ROLE_")) {
+                    u.setRoles(u.getRoles().substring(5)); // Strip ROLE_ for Spring Security format
+                }
+                userRepository.save(u);
+            }
+        }
+
         if (movieRepository.count() > 0) {
             System.out.println("Database already seeded. Skipping seed process.");
             return;
@@ -35,8 +50,8 @@ public class DatabaseSeeder implements CommandLineRunner {
         System.out.println("Initializing CinePrime database with realistic seed data...");
 
         // 1. Seed Users
-        User admin = User.builder().username("admin").email("admin@cineprime.local").roles("ROLE_ADMIN").build();
-        User guest = User.builder().username("guest_user").email("guest@cineprime.local").roles("ROLE_USER").build();
+        User admin = User.builder().username("admin").email("admin@cineprime.local").roles("ADMIN").password(passwordEncoder.encode("password123")).build();
+        User guest = User.builder().username("guest_user").email("guest@cineprime.local").roles("USER").password(passwordEncoder.encode("password123")).build();
         userRepository.saveAll(List.of(admin, guest));
 
         // 2. Seed Movies

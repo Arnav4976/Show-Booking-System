@@ -1,12 +1,26 @@
 const API_BASE_URL = 'http://localhost:8080/api';
 
 const fetchJson = async (url, options = {}) => {
+  const headers = {
+    'Content-Type': 'application/json',
+    ...options.headers,
+  };
+
+  try {
+    const sessionStr = localStorage.getItem('cineprime_auth_session');
+    if (sessionStr) {
+      const session = JSON.parse(sessionStr);
+      if (session && session.token) {
+        headers['Authorization'] = `Bearer ${session.token}`;
+      }
+    }
+  } catch (e) {
+    // Ignore JSON parse errors for session
+  }
+
   const response = await fetch(`${API_BASE_URL}${url}`, {
     ...options,
-    headers: {
-      'Content-Type': 'application/json',
-      ...options.headers,
-    },
+    headers,
   });
 
   if (!response.ok) {
@@ -29,7 +43,7 @@ const fetchJson = async (url, options = {}) => {
 const delay = (ms) => new Promise(res => setTimeout(res, ms));
 
 // ==========================================
-// Authentication & Users (Mock)
+// Authentication & Users
 // ==========================================
 export const AuthService = {
   // POST /api/auth/register
@@ -41,18 +55,17 @@ export const AuthService = {
 
   // POST /api/auth/login
   login: async (credentials) => {
-    await delay(300);
+    const response = await fetchJson('/auth/login', {
+      method: 'POST',
+      body: JSON.stringify(credentials)
+    });
     
-    // Mock role distribution based on predictable testing credentials
-    const isAdmin = credentials.username === 'admin';
-
     return {
-      token: "mock-jwt-token-ey12345",
+      token: response.token,
       type: "Bearer",
-      id: isAdmin ? 99 : 1,
-      username: credentials.username || "guest_user",
-      email: isAdmin ? "admin@cineprime.local" : "guest@cineprime.local",
-      roles: isAdmin ? ["ROLE_ADMIN"] : ["ROLE_USER"]
+      id: response.userId,
+      username: response.username,
+      roles: [`ROLE_${response.role}`]
     };
   },
 
@@ -126,7 +139,7 @@ export const BookingService = {
   create: async (bookingData) => fetchJson('/bookings', { method: 'POST', body: JSON.stringify(bookingData) }),
   getAll: async () => fetchJson('/bookings'),
   getById: async (id) => fetchJson(`/bookings/${id}`),
-  getUserBookings: async (userId = 1) => fetchJson(`/users/${userId}/bookings`),
+  getUserBookings: async (userId) => fetchJson(`/users/${userId}/bookings`),
   delete: async (id) => fetchJson(`/bookings/${id}`, { method: 'DELETE' })
 };
 
