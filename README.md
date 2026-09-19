@@ -102,4 +102,25 @@ Docker Container
     ├── README.md
     └── .gitignore
 
+## Installation
+# 1. Clone the repository
+git clone https://github.com/YOUR_USERNAME/cineprime.git
+cd cineprime
 
+# 2. Start the PostgreSQL database
+docker compose up -d
+
+# 3. Install frontend dependencies
+npm install
+
+# 4. Start the Spring Boot backend
+cd backend
+./mvnw spring-boot:run
+
+# 5. Start the React frontend
+cd ..
+npm run dev
+
+# The application will be available at:
+  Frontend: http://localhost:5173
+  Backend:  http://localhost:8080
