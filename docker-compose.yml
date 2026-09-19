@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  cineprime-postgres:
+    image: postgres:17
+    container_name: cineprime-postgres
+    restart: always
+    environment:
+      POSTGRES_DB: cineprime
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5433:5432"
+    volumes:
+      - cineprime_db_data:/var/lib/postgresql/data
+
+volumes:
+  cineprime_db_data:

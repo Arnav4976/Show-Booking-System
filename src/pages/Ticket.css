@@ -1,0 +1,110 @@
+.ticket-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 500px;
+  background: var(--bg);
+  border: 2px solid var(--ink);
+  box-shadow: 12px 12px 0 var(--ink);
+  position: relative;
+}
+
+.ticket-main {
+  padding: 3rem 2.5rem 1.5rem;
+}
+
+.ticket-header {
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.2rem;
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 4px solid var(--ink);
+}
+
+.ticket-body .movie-title {
+  font-size: 3rem;
+  line-height: 0.9;
+  margin-bottom: 2.5rem;
+  text-transform: uppercase;
+  word-break: break-word;
+}
+
+.ticket-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  font-weight: 700;
+}
+
+.ticket-detail {
+  display: flex;
+  flex-direction: column;
+}
+
+.ticket-detail .label {
+  font-size: 0.75rem;
+  color: var(--ink);
+  opacity: 0.7;
+  margin-bottom: 0.25rem;
+}
+
+.ticket-detail .value {
+  font-size: 1.1rem;
+}
+
+.ticket-divider {
+  position: relative;
+  height: 2px;
+  border-bottom: 2px dashed var(--ink);
+  margin: 1rem 0;
+}
+
+.ticket-divider::before, .ticket-divider::after {
+  content: '';
+  position: absolute;
+  top: -12px;
+  width: 20px;
+  height: 20px;
+  background-color: transparent;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+}
+
+.ticket-divider::before {
+  left: -2px;
+  border-left-color: transparent;
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  transform: translateX(-10px);
+}
+
+.ticket-divider::after {
+  right: -2px;
+  border-right-color: transparent;
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  transform: translateX(10px);
+}
+
+.ticket-stub {
+  padding: 1.5rem 2.5rem 3rem;
+  background: var(--disabled);
+}
+
+.ticket-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 2rem;
+  font-weight: 700;
+}
+.ticket-total .label {
+  font-size: 1rem;
+}
+.ticket-total h1 {
+  font-size: 3.5rem;
+  line-height: 0.8;
+  color: var(--accent);
+}

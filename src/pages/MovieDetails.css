@@ -1,0 +1,95 @@
+.movie-details-container {
+  padding: 3rem 0;
+}
+.layout-grid {
+  display: flex;
+  gap: 3rem;
+  align-items: flex-start;
+}
+.movie-sidebar {
+  width: 250px;
+  flex-shrink: 0;
+}
+.detail-poster {
+  width: 100%;
+  aspect-ratio: 2/3;
+  object-fit: cover;
+  border: 2px solid var(--ink);
+  box-shadow: 4px 4px 0 var(--ink);
+  display: block;
+  margin-bottom: 1.5rem;
+  filter: sepia(0.1) contrast(1.05); /* very subtle print feel */
+}
+.movie-metadata {
+  font-size: 0.8rem;
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border-top: 2px dashed var(--ink);
+  padding-top: 1rem;
+}
+.movie-main {
+  flex: 1;
+}
+.movie-main h1 {
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.1;
+  text-transform: uppercase;
+  border-bottom: 4px solid var(--ink);
+  padding-bottom: 1rem;
+}
+.description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 3rem;
+  max-width: 650px;
+}
+.ticket-action-area {
+  background: var(--disabled);
+  border: 2px solid var(--ink);
+  padding: 2rem;
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.section-title {
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+}
+.shows-list {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.show-btn {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+  padding: 1rem 1.5rem;
+  border-color: var(--accent); /* highlight interactive booking elements */
+}
+.show-btn:hover {
+  background: var(--accent);
+  color: white;
+  border-color: var(--ink);
+}
+.show-time {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+.show-theater {
+  font-size: 0.75rem;
+}
+
+@media (max-width: 768px) {
+  .layout-grid {
+    flex-direction: column;
+  }
+  .movie-sidebar {
+    width: 200px;
+  }
+  .movie-main h1 {
+    font-size: 2.25rem;
+  }
+}
