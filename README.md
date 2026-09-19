@@ -67,3 +67,19 @@ PostgreSQL
     │
     ▼
 Docker Container
+```
+## Project Structure
+cineprime/
+├── backend/
+├── src/
+│   ├── components/
+│   ├── context/
+│   ├── pages/
+│   │   └── admin/
+│   └── services/
+├── screenshots/
+├── docker-compose.yml
+├── package.json
+└── README.md
+
+
