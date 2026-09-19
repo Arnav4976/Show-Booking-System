@@ -4,28 +4,6 @@ A full-stack movie and theatre ticket booking system built with **React.js, Spri
 
 Users can browse movies, view shows, select seats, book tickets, cancel bookings, and view their ticket history. Administrators can manage movies, theatres, screens, and shows through a protected admin portal.
 
-## Screenshots
-
-### Home Page
-<p align="center">
-  <img src="screenshots/home.png" width="800">
-</p>
-
-### Seat Selection
-<p align="center">
-  <img src="screenshots/seat-selection.png" width="800">
-</p>
-
-### My Tickets
-<p align="center">
-  <img src="screenshots/my-tickets.png" width="800">
-</p>
-
-### Admin Dashboard
-<p align="center">
-  <img src="screenshots/admin-dashboard.png" width="800">
-</p>
-
 ## Features
 
 - User registration and JWT-based authentication
